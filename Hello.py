@@ -1,5 +1,5 @@
 import streamlit as st
-
+import foodFunction
 def run():
     st.set_page_config(
         page_title="Data Mining Individual Assignment 1 ",
