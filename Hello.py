@@ -37,6 +37,8 @@ def run():
 
     features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
             "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
+
+    sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
     
     # Find the index of the user-input premise in the features list
     premise_index = features.index(selected_option)
