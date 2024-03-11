@@ -1,4 +1,3 @@
-pip install openpyxl
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
@@ -70,16 +69,19 @@ X = df.values
 n_features = 3  # Number of food items
 features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
             "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
+
 def main():
     st.title("Food Recommendation System")
-
-    # User input for initial food order
-    initial_order = st.text_input("Enter your initial food order (e.g., burger, pizza, sushi):")
-
+    # Define your options for the dropdown
+    options = ['burger', 'pizza', 'sushi']  # Add more options as needed
+    
+    # User input for initial food order using dropdown
+    initial_order = st.selectbox("Select your initial food order:", options)
+    
     if st.button("Get Recommendations"):
         # Call recommendFood function
         recommendations = recommendFood(initial_order, X, n_features, features)
-
+    
         # Display recommendations
         st.subheader("Top 3 Recommendations based on your initial order:")
         for i, rule in enumerate(recommendations):
