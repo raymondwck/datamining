@@ -1,7 +1,7 @@
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
-import demo
+import foodFunction
 def recommendFood(user_input, X, n_features, features):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
@@ -110,7 +110,7 @@ def main():
         st.subheader("Top 3 Recommendations based on your initial order:")
         st.write(recommendations)
 
-    answer = demo.recommendFood(options)
+    answer = foodFunction.recommendFood(options)
     st.write(answer)
 if __name__ == "__main__":
     main()
