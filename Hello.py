@@ -27,7 +27,7 @@ def run():
     # Display the selected option
     st.write('You selected:', selected_option)
 
-def recommendFood(selected_option):
+    def recommendFood(selected_option):
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
         conclusion_name = features[conclusion]
@@ -75,6 +75,7 @@ def recommendFood(selected_option):
             st.write("Recommended food:", recommended_food)
         else:
             st.write("No recommendation found.")
+
 
 
 if __name__ == "__main__":
