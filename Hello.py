@@ -1,5 +1,5 @@
 import streamlit as st
-import demo.py
+import demo
     
 def run():
     st.set_page_config(
