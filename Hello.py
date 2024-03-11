@@ -101,7 +101,7 @@ def main():
     
         # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
-
+    st.write(options)
     if st.button("Get Recommendations"):
         # Call recommendFood function
         recommendations = recommendFood(initial_order, X, n_features, features)
