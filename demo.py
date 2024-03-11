@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_excel("JapanMenuItems.xlsx")
+df = pd.read_excel("JapanMenuItems.xlsx", engine='openpyxl')
+
 
 X = df.values
 n_samples, n_features = X.shape
