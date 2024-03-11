@@ -68,13 +68,6 @@ def recommendFood(user_input, X, features):
         
     return rule_texts
 
-# Streamlit app
-def main():
-
-
-if __name__ == "__main__":
-    main()
-
 
 import pandas as pd
 import requests
