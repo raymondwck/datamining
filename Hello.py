@@ -110,7 +110,6 @@ def main():
         # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
     
-    st.title("Food Recommendation System")
     if st.button("Recommend"):
         rules = recommendFood(initial_order, X, features)
         for rule in rules:
