@@ -79,7 +79,7 @@ else:
     print("Failed to download the Excel file.")
 
 X = df.values
-n_features = 3  # Number of food items
+n_features = 4  # Number of food items
 features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
             "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
 
@@ -102,16 +102,6 @@ def main():
         # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
     
-    def format_rule(rule):
-        formatted_rule = "[\n"
-        for item in rule:
-            formatted_rule += f"\t{item[0]}:[\n"
-            for sub_item in item[1:]:
-                formatted_rule += f"\t\t{sub_item[0]}:{sub_item[1]}\n"
-            formatted_rule += "\t]\n"
-        formatted_rule += "]"
-        return formatted_rule
-        
     if st.button("Get Recommendations"):
         
         # Call recommendFood function
@@ -119,11 +109,6 @@ def main():
         
         # Display recommendations
         st.subheader("Top 3 Recommendations based on your initial order:")
-        # Assuming 'recommendations' is your output containing the rules
-        formatted_recommendations = [format_rule(rule) for rule in recommendations]
-        
-        # Display formatted recommendations
-        for i, formatted_rule in enumerate(formatted_recommendations):
-            st.write(f"Recommendation #{i+1}: {formatted_rule}")
+        st.write(recommendations)
 if __name__ == "__main__":
     main()
