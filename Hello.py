@@ -71,7 +71,7 @@ features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriy
 def main():
     st.title("Food Recommendation System")
     # Define your options for the dropdown
-        options = {
+    options = {
         "California Roll": 0,
         "Salmon Nigiri": 1,
         "Tonkotsu Ramen": 2,
