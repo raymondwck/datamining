@@ -8,10 +8,7 @@ def run():
     )
 
     st.write("Japanese Food Recommendation System")
-    # Using the function from the imported module
-    result = foodFunction.recommendFood()
-    
-    st.write("Result:", result)
+
 
 
 if __name__ == "__main__":
