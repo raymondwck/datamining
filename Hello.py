@@ -110,5 +110,7 @@ def main():
         st.subheader("Top 3 Recommendations based on your initial order:")
         st.write(recommendations)
 
+    answer = demo.recommendFood(options)
+    st.write(answer)
 if __name__ == "__main__":
     main()
