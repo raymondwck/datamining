@@ -1,151 +1,41 @@
-import pandas as pd
-import numpy as np
-
-df = pd.read_excel("JapanMenuItems.xlsx", engine='openpyxl')
-
-
-X = df.values
-n_samples, n_features = X.shape
-print("This dataset has {0} samples and {1} features".format(n_samples, n_features))
-
-features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
-            "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
-
-rule_valid = 0
-rule_invalid = 0
-for sample in X:
-    if sample[0] == 1:  # This person bought california roll
-        if sample[9] == 1:
-            # This person bought both california roll and matcha latte
-            rule_valid += 1
-        else:
-            # This person bought california roll, but not matchal atte
-            rule_invalid += 1
-print("{0} cases of the rule being valid were discovered".format(rule_valid))
-print("{0} cases of the rule being invalid were discovered".format(rule_invalid))
-
-
-# In[12]:
-
-
-# Now we have all the information needed to compute Support and Confidence
-support = rule_valid  # The Support is the number of times the rule is discovered.
-confidence = rule_valid / num_californiaRoll_purchases
-print("The support is {0} and the confidence is {1:.3f}.".format(support, confidence))
-# Confidence can be thought of as a percentage using the following:
-print("As a percentage, that is {0:.1f}%.".format(100 * confidence))
-
-
-# In[13]:
-
-
+import streamlit as st
+from operator import itemgetter
 from collections import defaultdict
 
-# Now compute for all possible rules
-valid_rules = defaultdict(int)
-invalid_rules = defaultdict(int)
-num_occurences = defaultdict(int)
+def recommendFood(user_input, X, n_features, features):
+    # Now compute for all possible rules
+    valid_rules = defaultdict(int)
+    invalid_rules = defaultdict(int)
+    num_occurrences = defaultdict(int)
 
-for sample in X:
-    for premise in range(n_features):
-        if sample[premise] == 0: continue
-        # Record that the premise was bought in another transaction
-        num_occurences[premise] += 1
-        for conclusion in range(n_features):
-            if premise == conclusion:  # It makes little sense to measure if X -> X.
+    for sample in X:
+        for premise in range(n_features):
+            if sample[premise] == 0:
                 continue
-            if sample[conclusion] == 1:
-                # This person also bought the conclusion item
-                valid_rules[(premise, conclusion)] += 1
-            else:
-                # This person bought the premise, but not the conclusion
-                invalid_rules[(premise, conclusion)] += 1
-support = valid_rules
-confidence = defaultdict(float)
-for premise, conclusion in valid_rules.keys():
-    confidence[(premise, conclusion)] = valid_rules[(premise, conclusion)] / num_occurences[premise]
+            # Record that the premise was bought in another transaction
+            num_occurrences[premise] += 1
+            for conclusion in range(n_features):
+                if premise == conclusion:  # It makes little sense to measure if X -> X.
+                    continue
+                if sample[conclusion] == 1:
+                    # This person also bought the conclusion item
+                    valid_rules[(premise, conclusion)] += 1
+                else:
+                    # This person bought the premise, but not the conclusion
+                    invalid_rules[(premise, conclusion)] += 1
+    support = valid_rules
+    confidence = defaultdict(float)
+    for premise, conclusion in valid_rules.keys():
+        confidence[(premise, conclusion)] = valid_rules[(premise, conclusion)] / num_occurrences[premise]
 
+    sorted_support = sorted(support.items(), key=itemgetter(1), reverse=True)
+    sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
 
-# In[14]:
-
-
-for premise, conclusion in confidence:
-    premise_name = features[premise]
-    conclusion_name = features[conclusion]
-    print("Rule: If a person buys {0} they will also buy {1}".format(premise_name, conclusion_name))
-    print(" - Confidence: {0:.3f}".format(confidence[(premise, conclusion)]))
-    print(" - Support: {0}".format(support[(premise, conclusion)]))
-    print("")
-
-
-# In[15]:
-
-
-def print_rule(premise, conclusion, support, confidence, features):
-    premise_name = features[premise]
-    conclusion_name = features[conclusion]
-    print("Rule: If a person buys {0} they will also buy {1}".format(premise_name, conclusion_name))
-    print(" - Confidence: {0:.3f}".format(confidence[(premise, conclusion)]))
-    print(" - Support: {0}".format(support[(premise, conclusion)]))
-    print("")
-
-
-
-# In[17]:
-
-
-# Sort by support
-from pprint import pprint
-pprint(list(support.items()))
-
-
-# In[18]:
-
-
-from operator import itemgetter
-sorted_support = sorted(support.items(), key=itemgetter(1), reverse=True)
-
-
-# In[19]:
-
-
-for index in range(10):
-    print("Rule #{0}".format(index + 1))
-    (premise, conclusion) = sorted_support[index][0]
-    print_rule(0, conclusion, support, confidence, features)
-
-
-# In[20]:
-
-
-sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
-
-
-# In[28]:
-
-
-for index in range(10):
-    print("Rule #{0}".format(index + 1))
-    (premise, conclusion) = sorted_confidence[index][0]
-    print_rule(9, conclusion, support, confidence, features)
-
-
-# ### Adding all function into one
-
-# In[38]:
-
-
-def recommendFood (user_input):
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
         conclusion_name = features[conclusion]
-        print("Rule: If a person buys {0} they will also buy {1}".format(premise_name, conclusion_name))
-        print(" - Confidence: {0:.3f}".format(confidence[(premise, conclusion)]))
-        print(" - Support: {0}".format(support[(premise, conclusion)]))
-        print("")
-
-    # Prompt the user to input a premise
-    user_input = input("Enter a Food Name: ")
+        return "If a person buys {0}, they will also buy {1}. Confidence: {2:.3f}, Support: {3}".format(
+            premise_name, conclusion_name, confidence[(premise, conclusion)], support[(premise, conclusion)])
 
     # Find the index of the user-input premise in the features list
     premise_index = features.index(user_input)
@@ -169,7 +59,30 @@ def recommendFood (user_input):
     # Sort the rules based on confidence score
     sorted_rules = sorted(rules, key=lambda x: confidence[x], reverse=True)
 
-    # Print the top three rules
-    for i, rule in enumerate(sorted_rules[:3]):
-        print("Rule #{0}".format(i + 1))
-        printRule(rule[0], rule[1], support, confidence, features)
+    return sorted_rules[:3]
+
+import pandas as pd
+
+# Load the Excel file into a DataFrame
+df = pd.read_excel('JapanMenuItems.xlsx')
+X = df.values
+n_features = 3  # Number of food items
+features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
+            "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
+def main():
+    st.title("Food Recommendation System")
+
+    # User input for initial food order
+    initial_order = st.text_input("Enter your initial food order (e.g., burger, pizza, sushi):")
+
+    if st.button("Get Recommendations"):
+        # Call recommendFood function
+        recommendations = recommendFood(initial_order, X, n_features, features)
+
+        # Display recommendations
+        st.subheader("Top 3 Recommendations based on your initial order:")
+        for i, rule in enumerate(recommendations):
+            st.write(f"Recommendation #{i+1}: {printRule(*rule, support, confidence, features)}")
+
+if __name__ == "__main__":
+    main()
