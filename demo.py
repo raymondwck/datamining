@@ -1,95 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import numpy as np
 
-
-# In[2]:
-
-
 df = pd.read_excel("JapanMenuItems.xlsx")
-df
-
-
-# # Data Exploration 
-
-# In[3]:
-
 
 X = df.values
 n_samples, n_features = X.shape
 print("This dataset has {0} samples and {1} features".format(n_samples, n_features))
 
-
-# In[4]:
-
-
-X
-
-
-# ### Checking the dataset is there are any null 
-
-# In[5]:
-
-
-print(df.isnull().sum())
-
-
-# ### Checking the datatypes of the values
-
-# In[6]:
-
-
-print(df.dtypes)
-
-
-# In[35]:
-
-
-
-# ### Adding name into features columns
-
-# In[8]:
-
-
 features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
             "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
-
-
-# ### bar chart 
-
-# In[34]:
-
-
-
-# In[10]:
-
-
-# First, how many rows contain our premise: that a person is buying california roll
-num_californiaRoll_purchases = 0
-for sample in X:
-    if sample[0] == 1:  # This person bought california roll
-        num_californiaRoll_purchases += 1
-print("{0} people bought California Roll".format(num_californiaRoll_purchases))
-
-
-# In[31]:
-
-
-# First, how many rows contain our premise: that a person is buying california roll
-num_californiaRoll_purchases = 0
-for sample in X:
-    if sample[0] == 0:  # This person bought california roll
-        num_californiaRoll_purchases += 1
-print("{0} people bought California Roll".format(num_californiaRoll_purchases))
-
-
-# In[11]:
-
 
 rule_valid = 0
 rule_invalid = 0
@@ -169,13 +88,6 @@ def print_rule(premise, conclusion, support, confidence, features):
     print(" - Support: {0}".format(support[(premise, conclusion)]))
     print("")
 
-
-# In[16]:
-
-
-premise = 1
-conclusion = 3
-print_rule(premise, conclusion, support, confidence, features)
 
 
 # In[17]:
@@ -260,12 +172,3 @@ def recommendFood (user_input):
     for i, rule in enumerate(sorted_rules[:3]):
         print("Rule #{0}".format(i + 1))
         printRule(rule[0], rule[1], support, confidence, features)
-
-
-# In[41]:
-
-
-recommendFood(x)
-
-
-# In[ ]:
