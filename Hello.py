@@ -39,6 +39,10 @@ def run():
             "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
 
     from collections import defaultdict
+    df = pd.read_excel("JapanMenuItems.xlsx")
+
+    X = df.values
+    n_samples, n_features = X.shape
 
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
