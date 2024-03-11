@@ -1,19 +1,19 @@
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
-import foodFunction
-def recommendFood(user_input, X, n_features, features):
+
+def recommendFood(user_input, X, features):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
     invalid_rules = defaultdict(int)
-    num_occurrences = defaultdict(int)
+    num_occurences = defaultdict(int)
+    n_features = len(features)
 
     for sample in X:
         for premise in range(n_features):
-            if sample[premise] == 0:
-                continue
+            if sample[premise] == 0: continue
             # Record that the premise was bought in another transaction
-            num_occurrences[premise] += 1
+            num_occurences[premise] += 1
             for conclusion in range(n_features):
                 if premise == conclusion:  # It makes little sense to measure if X -> X.
                     continue
@@ -26,16 +26,18 @@ def recommendFood(user_input, X, n_features, features):
     support = valid_rules
     confidence = defaultdict(float)
     for premise, conclusion in valid_rules.keys():
-        confidence[(premise, conclusion)] = valid_rules[(premise, conclusion)] / num_occurrences[premise]
+        confidence[(premise, conclusion)] = valid_rules[(premise, conclusion)] / num_occurences[premise]
 
     sorted_support = sorted(support.items(), key=itemgetter(1), reverse=True)
     sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
-
+    
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
         conclusion_name = features[conclusion]
-        return "Rule: If a person buys {0} they will also buy {1}\n- Confidence: {2:.3f}\n- Support: {3}\n".format(
-            premise_name, conclusion_name, confidence[(premise, conclusion)], support[(premise, conclusion)])
+        rule = f"Rule: If a person buys {premise_name}, they will also buy {conclusion_name}\n"
+        rule += f"- Confidence: {confidence[(premise, conclusion)]:.3f}\n"
+        rule += f"- Support: {support[(premise, conclusion)]}\n"
+        return rule
 
     # Find the index of the user-input premise in the features list
     premise_index = features.index(user_input)
@@ -59,7 +61,20 @@ def recommendFood(user_input, X, n_features, features):
     # Sort the rules based on confidence score
     sorted_rules = sorted(rules, key=lambda x: confidence[x], reverse=True)
 
-    return sorted_rules[:3]
+    # Prepare the rules for display
+    rule_texts = []
+    for i, rule in enumerate(sorted_rules[:3]):
+        rule_texts.append(f"Rule #{i + 1}\n{printRule(rule[0], rule[1], support, confidence, features)}")
+        
+    return rule_texts
+
+# Streamlit app
+def main():
+
+
+if __name__ == "__main__":
+    main()
+
 
 import pandas as pd
 import requests
@@ -102,13 +117,12 @@ def main():
         # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
     
-    if st.button("Get Recommendations"):
-        
-        # Call recommendFood function
-        recommendations = recommendFood(initial_order, X, n_features, features)
-        
-        # Display recommendations
-        st.subheader("Top 3 Recommendations based on your initial order:")
-        st.write(recommendations)
+    st.title("Food Recommendation System")
+    user_input = st.text_input("Enter a Food Name:")
+    if st.button("Recommend"):
+        rules = recommendFood(initial_order, X, features)
+        for rule in rules:
+            st.write(rule)
+            
 if __name__ == "__main__":
     main()
