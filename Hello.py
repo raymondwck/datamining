@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit.logger import get_logger
-import Assignment 1 (1)
+import foodFunction
 def run():
     st.set_page_config(
         page_title="Data Mining Individual Assignment 1 ",
@@ -9,7 +9,7 @@ def run():
 
     st.write("Japanese Food Recommendation System")
     # Using the function from the imported module
-    result = Assignment 1 (1).recommendFood()
+    result = foodFunction.recommendFood()
     
     st.write("Result:", result)
 
