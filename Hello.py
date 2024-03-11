@@ -104,13 +104,10 @@ def main():
 
     if st.button("Get Recommendations"):
         # Call recommendFood function
-        #recommendations = recommendFood(initial_order, X, n_features, features)
+        recommendations = recommendFood(initial_order, X, n_features, features)
         
         # Display recommendations
         st.subheader("Top 3 Recommendations based on your initial order:")
-        #st.write(recommendations)
-
-        answer = foodFunction.recommendFood(initial_order)
-        st.write(answer)
+        st.write(recommendations)
 if __name__ == "__main__":
     main()
