@@ -1,13 +1,5 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-def printRule(premise, conclusion, support, confidence, features):
-    premise_name = features[premise]
-    conclusion_name = features[conclusion]
-    st.write("Rule: If a person buys {0} they will also buy {1}".format(premise_name, conclusion_name))
-    st.write("- Confidence: {0:.3f}".format(confidence[(premise, conclusion)]))
-    st.write("- Support: {0}".format(support[(premise, conclusion)]))
-    st.write("")
+import demo.py
     
 def run():
     st.set_page_config(
