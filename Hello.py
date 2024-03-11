@@ -1,4 +1,3 @@
-
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
@@ -61,8 +60,6 @@ def recommendFood(user_input, X, n_features, features):
     sorted_rules = sorted(rules, key=lambda x: confidence[x], reverse=True)
 
     return sorted_rules[:3]
-
-import pandas as pd
 
 # Load the Excel file into a DataFrame
 df = pd.read_excel('JapanMenuItems.xlsx')
