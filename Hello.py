@@ -1,7 +1,7 @@
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
-
+import demo
 def recommendFood(user_input, X, n_features, features):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
