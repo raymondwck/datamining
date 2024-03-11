@@ -1,5 +1,6 @@
 import streamlit as st
 import foodFunction
+pip install seaborn
 def run():
     st.set_page_config(
         page_title="Data Mining Individual Assignment 1 ",
