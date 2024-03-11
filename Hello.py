@@ -6,11 +6,11 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Hello",
+        page_title="Data Mining Individual Assignment 1 ",
         page_icon="👋",
     )
 
-    st.write("Data Mining Individual 👋")
+    st.write("Data Mining Individual Assignment ")
 
 
 if __name__ == "__main__":
