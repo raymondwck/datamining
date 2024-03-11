@@ -32,10 +32,10 @@ def recommendFood(user_input, X, n_features, features):
     sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
 
     def printRule(premise, conclusion, support, confidence, features):
-    premise_name = features[premise]
-    conclusion_name = features[conclusion]
-    return "Rule: If a person buys {0} they will also buy {1}\n- Confidence: {2:.3f}\n- Support: {3}\n".format(
-        premise_name, conclusion_name, confidence[(premise, conclusion)], support[(premise, conclusion)])
+        premise_name = features[premise]
+        conclusion_name = features[conclusion]
+        return "Rule: If a person buys {0} they will also buy {1}\n- Confidence: {2:.3f}\n- Support: {3}\n".format(
+            premise_name, conclusion_name, confidence[(premise, conclusion)], support[(premise, conclusion)])
 
     # Find the index of the user-input premise in the features list
     premise_index = features.index(user_input)
