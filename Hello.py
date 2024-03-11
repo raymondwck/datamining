@@ -73,7 +73,18 @@ features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriy
 def main():
     st.title("Food Recommendation System")
     # Define your options for the dropdown
-    options = ['burger', 'pizza', 'sushi']  # Add more options as needed
+        options = {
+        "California Roll": 0,
+        "Salmon Nigiri": 1,
+        "Tonkotsu Ramen": 2,
+        "Chicken Teriyaki Bento": 3,
+        "Edamame": 4,
+        "Gyoza (Dumplings)": 5,
+        "Tempura (Shrimp)": 6,
+        "Green Tea Ice Cream": 7,
+        "Mochi Ice Cream": 8,
+        "Matcha Latte": 9
+    }
     
     # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
