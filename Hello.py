@@ -1,5 +1,6 @@
 import streamlit as st
-
+import pandas as pd
+import numpy as np
 def printRule(premise, conclusion, support, confidence, features):
     premise_name = features[premise]
     conclusion_name = features[conclusion]
