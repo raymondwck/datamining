@@ -61,8 +61,23 @@ def recommendFood(user_input, X, n_features, features):
 
     return sorted_rules[:3]
 
-# Load the Excel file into a DataFrame
-df = pd.read_excel(https://github.com/raymondwck/datamining/blob/77e7ff11d72d28afeaa2f850cc03c5bfe6893fc8/JapanMenuItems.xlsx)
+import pandas as pd
+import requests
+from io import BytesIO
+
+# URL of the Excel file
+url = 'https://github.com/raymondwck/datamining/raw/77e7ff11d72d28afeaa2f850cc03c5bfe6893fc8/JapanMenuItems.xlsx'
+
+# Download the Excel file from the URL
+response = requests.get(url)
+if response.status_code == 200:
+    # Read the Excel file from the response content
+    df = pd.read_excel(BytesIO(response.content))
+    # Display the DataFrame
+    print(df)
+else:
+    print("Failed to download the Excel file.")
+
 X = df.values
 n_features = 3  # Number of food items
 features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
