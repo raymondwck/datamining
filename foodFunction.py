@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 # In[2]:
 
 
-df = pd.read_excel("C:/Users/Ck/Desktop/Study/2024 Jan Sesmester/Data Mining/Assignment 1 Individual/JapanMenuItems.xlsx")
+df = pd.read_excel("JapanMenuItems.xlsx")
 df
 
 
