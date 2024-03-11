@@ -38,6 +38,32 @@ def run():
     features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
             "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
 
+    from collections import defaultdict
+
+    # Now compute for all possible rules
+    valid_rules = defaultdict(int)
+    invalid_rules = defaultdict(int)
+    num_occurences = defaultdict(int)
+    
+    for sample in X:
+        for premise in range(n_features):
+            if sample[premise] == 0: continue
+            # Record that the premise was bought in another transaction
+            num_occurences[premise] += 1
+            for conclusion in range(n_features):
+                if premise == conclusion:  # It makes little sense to measure if X -> X.
+                    continue
+                if sample[conclusion] == 1:
+                    # This person also bought the conclusion item
+                    valid_rules[(premise, conclusion)] += 1
+                else:
+                    # This person bought the premise, but not the conclusion
+                    invalid_rules[(premise, conclusion)] += 1
+    support = valid_rules
+    confidence = defaultdict(float)
+    for premise, conclusion in valid_rules.keys():
+        confidence[(premise, conclusion)] = valid_rules[(premise, conclusion)] / num_occurences[premise]
+        
     sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
     
     # Find the index of the user-input premise in the features list
