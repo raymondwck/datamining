@@ -1,7 +1,7 @@
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
-
+import foodFunction
 def recommendFood(user_input, X, n_features, features):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
@@ -34,7 +34,7 @@ def recommendFood(user_input, X, n_features, features):
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
         conclusion_name = features[conclusion]
-        return "If a person buys {0}, they will also buy {1}. Confidence: {2:.3f}, Support: {3}".format(
+        return "Rule: If a person buys {0} they will also buy {1}\n- Confidence: {2:.3f}\n- Support: {3}\n".format(
             premise_name, conclusion_name, confidence[(premise, conclusion)], support[(premise, conclusion)])
 
     # Find the index of the user-input premise in the features list
@@ -62,27 +62,53 @@ def recommendFood(user_input, X, n_features, features):
     return sorted_rules[:3]
 
 import pandas as pd
+import requests
+from io import BytesIO
 
-# Load the Excel file into a DataFrame
-df = pd.read_excel('JapanMenuItems.xlsx')
+# URL of the Excel file
+url = 'https://github.com/raymondwck/datamining/raw/77e7ff11d72d28afeaa2f850cc03c5bfe6893fc8/JapanMenuItems.xlsx'
+
+# Download the Excel file from the URL
+response = requests.get(url)
+if response.status_code == 200:
+    # Read the Excel file from the response content
+    df = pd.read_excel(BytesIO(response.content))
+    # Display the DataFrame
+    print(df)
+else:
+    print("Failed to download the Excel file.")
+
 X = df.values
-n_features = 3  # Number of food items
+n_features = 4  # Number of food items
 features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
             "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
+
 def main():
     st.title("Food Recommendation System")
-
-    # User input for initial food order
-    initial_order = st.text_input("Enter your initial food order (e.g., burger, pizza, sushi):")
-
+    # Define your options for the dropdown
+    options = {
+        "California Roll": 0,
+        "Salmon Nigiri": 1,
+        "Tonkotsu Ramen": 2,
+        "Chicken Teriyaki Bento": 3,
+        "Edamame": 4,
+        "Gyoza (Dumplings)": 5,
+        "Tempura (Shrimp)": 6,
+        "Green Tea Ice Cream": 7,
+        "Mochi Ice Cream": 8,
+        "Matcha Latte": 9
+    }
+    
+        # User input for initial food order using dropdown
+    initial_order = st.selectbox("Select your initial food order:", options)
+    
     if st.button("Get Recommendations"):
+        
         # Call recommendFood function
         recommendations = recommendFood(initial_order, X, n_features, features)
-
+        
         # Display recommendations
         st.subheader("Top 3 Recommendations based on your initial order:")
-        for i, rule in enumerate(recommendations):
-            st.write(f"Recommendation #{i+1}: {printRule(*rule, support, confidence, features)}")
-
+        st.write(recommendations)
 if __name__ == "__main__":
     main()
