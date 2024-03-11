@@ -264,12 +264,6 @@ def recommendFood (user_input):
         printRule(rule[0], rule[1], support, confidence, features)
 
 
-# In[41]:
-
-
-recommendFood(x)
-
-
 # In[ ]:
 
 
