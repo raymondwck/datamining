@@ -1,4 +1,4 @@
-pip install openxyl
+
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
