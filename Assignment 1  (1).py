@@ -257,46 +257,53 @@ for index in range(10):
 
 # ### Adding all function into one
 
-# In[29]:
+# In[38]:
 
 
-def printRule(premise, conclusion, support, confidence, features):
-    premise_name = features[premise]
-    conclusion_name = features[conclusion]
-    print("Rule: If a person buys {0} they will also buy {1}".format(premise_name, conclusion_name))
-    print(" - Confidence: {0:.3f}".format(confidence[(premise, conclusion)]))
-    print(" - Support: {0}".format(support[(premise, conclusion)]))
-    print("")
+def recommendFood (user_input):
+    def printRule(premise, conclusion, support, confidence, features):
+        premise_name = features[premise]
+        conclusion_name = features[conclusion]
+        print("Rule: If a person buys {0} they will also buy {1}".format(premise_name, conclusion_name))
+        print(" - Confidence: {0:.3f}".format(confidence[(premise, conclusion)]))
+        print(" - Support: {0}".format(support[(premise, conclusion)]))
+        print("")
 
-# Prompt the user to input a premise
-user_input = input("Enter a Food Name: ")
+    # Prompt the user to input a premise
+    user_input = input("Enter a Food Name: ")
 
-# Find the index of the user-input premise in the features list
-premise_index = features.index(user_input)
+    # Find the index of the user-input premise in the features list
+    premise_index = features.index(user_input)
 
-# Create a list to store the rules
-rules = []
+    # Create a list to store the rules
+    rules = []
 
-# Iterate over the sorted confidence list
-for index in range(len(sorted_confidence)):
-    if len(rules) >= 3:
-        break
-    
-    (premise, conclusion) = sorted_confidence[index][0]
-    premise_name = features[premise]
-    conclusion_name = features[conclusion]
-    
-    # Check if the premise and conclusion names are different and if the premise matches user input
-    if premise_name != conclusion_name and premise == premise_index:
-        rules.append((premise, conclusion))
+    # Iterate over the sorted confidence list
+    for index in range(len(sorted_confidence)):
+        if len(rules) >= 3:
+            break
 
-# Sort the rules based on confidence score
-sorted_rules = sorted(rules, key=lambda x: confidence[x], reverse=True)
+        (premise, conclusion) = sorted_confidence[index][0]
+        premise_name = features[premise]
+        conclusion_name = features[conclusion]
 
-# Print the top three rules
-for i, rule in enumerate(sorted_rules[:3]):
-    print("Rule #{0}".format(i + 1))
-    printRule(rule[0], rule[1], support, confidence, features)
+        # Check if the premise and conclusion names are different and if the premise matches user input
+        if premise_name != conclusion_name and premise == premise_index:
+            rules.append((premise, conclusion))
+
+    # Sort the rules based on confidence score
+    sorted_rules = sorted(rules, key=lambda x: confidence[x], reverse=True)
+
+    # Print the top three rules
+    for i, rule in enumerate(sorted_rules[:3]):
+        print("Rule #{0}".format(i + 1))
+        printRule(rule[0], rule[1], support, confidence, features)
+
+
+# In[41]:
+
+
+recommendFood(x)
 
 
 # In[ ]:
