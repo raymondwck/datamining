@@ -110,7 +110,7 @@ def main():
         st.subheader("Top 3 Recommendations based on your initial order:")
         st.write(recommendations)
 
-        answer = foodFunction.recommendFood(options)
+        answer = foodFunction.recommendFood(initial_order)
         st.subheader("from foodfunction")
         st.write(answer)
 if __name__ == "__main__":
