@@ -1,6 +1,6 @@
 import streamlit as st
-from streamlit.logger import get_logger
 import foodFunction
+
 def run():
     st.set_page_config(
         page_title="Data Mining Individual Assignment 1 ",
