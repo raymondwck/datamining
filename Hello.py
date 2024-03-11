@@ -11,8 +11,6 @@ def run():
     )
 
     st.write("Data Mining Individual 👋")
-    
-    )
 
 
 if __name__ == "__main__":
