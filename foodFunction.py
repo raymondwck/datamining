@@ -52,23 +52,6 @@ print(df.dtypes)
 # In[35]:
 
 
-import seaborn as sns
-
-# Compute the correlation matrix
-correlation_matrix = np.corrcoef(X, rowvar=False)
-
-# Create the heatmap
-plt.figure(figsize=(10, 8))
-sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', xticklabels=features, yticklabels=features)
-
-# Labeling
-plt.title('Correlation Heatmap of Features')
-plt.xticks(rotation=45)
-plt.yticks(rotation=0)
-
-# Show plot
-plt.show()
-
 
 # ### Adding name into features columns
 
@@ -83,25 +66,6 @@ features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriy
 
 # In[34]:
 
-
-import matplotlib.pyplot as plt
-
-# Count the number of purchases for each item
-purchase_counts = [sum(1 for sample in X if sample[i] == 1) for i in range(len(features))]
-
-# Create the bar plot
-plt.figure(figsize=(10, 6))  # Adjust the figure size as needed
-plt.bar(features, purchase_counts)
-
-# Labeling
-plt.xlabel('Items')
-plt.ylabel('Number of Purchases')
-plt.title('Number of Purchases for Each Item')
-plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
-
-# Show the plot
-plt.tight_layout()  # Adjust layout to prevent overlap of labels
-plt.show()
 
 
 # In[10]:
