@@ -108,8 +108,7 @@ def main():
 
         # Display recommendations
         st.subheader("Top 3 Recommendations based on your initial order:")
-        for i, rule in enumerate(recommendations):
-            st.write(f"Recommendation #{i+1}: {printRule(*rule, support, confidence, features)}")
+        st.write(recommendations)
 
 if __name__ == "__main__":
     main()
