@@ -34,6 +34,9 @@ def run():
     
     # Display the selected option
     st.write('You selected:', selected_option)
+
+    features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
+            "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
     
     # Find the index of the user-input premise in the features list
     premise_index = features.index(selected_option)
