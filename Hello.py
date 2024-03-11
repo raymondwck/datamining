@@ -1,5 +1,5 @@
 import streamlit as st
-import foodFunction
+import demo
 
 def run():
     st.set_page_config(
