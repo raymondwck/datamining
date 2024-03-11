@@ -40,7 +40,7 @@ def run():
             "Green Tea Ice Cream", "Mochi Ice Cream", "Matcha Latte"]
 
     from collections import defaultdict
-    df = pd.read_excel("C:\Users\Ck\Desktop\Study\2024 Jan Sesmester\Data Mining\Assignment 1 Individual\JapanMenuItems.xlsx")
+    df = pd.read_excel("JapanMenuItems.xlsx",engine='openpyxl')
 
     X = df.values
     n_samples, n_features = X.shape
