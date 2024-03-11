@@ -10,7 +10,7 @@ def run():
         page_icon="👋",
     )
 
-    st.write("# Welcome to S 👋")
+    st.write("Data Mining Individual 👋")
 
     st.sidebar.success("Select a demo above.")
 
