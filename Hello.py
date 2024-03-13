@@ -67,6 +67,7 @@ def recommendFood(user_input, X, features):
 
     # Sort the rules based on confidence score
     sorted_rules = sorted(rules, key=lambda x: confidence[x], reverse=True)
+    rule_conclusion.append(conclusion_name)
 
     # Prepare the rules for display
     rule_texts = []
