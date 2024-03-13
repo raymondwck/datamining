@@ -96,12 +96,12 @@ def main():
     initial_order = st.selectbox("Select your initial food order:", options)
     
     if st.button("Recommend"):
-        rules = recommendFood(initial_order, X, features)
-        for rule in rules:
-            st.write(rule)
-            rule_features = features[rule]
-            st.write(rule_features)
-
+    rules = recommendFood(initial_order, X, features)
+    for rule in rules:
+        premise_index, conclusion_index = rule  # Extract premise and conclusion indices
+        premise_feature = features[premise_index]  # Get the feature name for the premise
+        conclusion_feature = features[conclusion_index]  # Get the feature name for the conclusion
+        st.write(f"Rule: If a person buys {premise_feature}, they will also buy {conclusion_feature}")
             
 if __name__ == "__main__":
     main()
