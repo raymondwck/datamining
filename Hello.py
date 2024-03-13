@@ -41,6 +41,7 @@ def recommendFood(user_input, X, features):
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
         conclusion_name = features[conclusion]
+        rule_conclusion.append(conclusion_name)
         rule = f"Rule: If a person buys {premise_name}, they will also buy {conclusion_name}\n"
         rule += f"- Confidence: {confidence[(premise, conclusion)]:.3f}\n"
         rule += f"- Support: {support[(premise, conclusion)]}\n"
@@ -67,7 +68,7 @@ def recommendFood(user_input, X, features):
 
     # Sort the rules based on confidence score
     sorted_rules = sorted(rules, key=lambda x: confidence[x], reverse=True)
-    rule_conclusion.append(conclusion_name)
+    
 
     # Prepare the rules for display
     rule_texts = []
