@@ -92,7 +92,7 @@ def main():
         "Chicken Teriyaki Bento": {"image": "Pic/chicken teriyaki bento.jpg", "value": 3},
         "Edamame": {"image": "Pic/edamame.jpg", "value": 4},
         "Gyoza (Dumplings)": {"image": "Pic/Gyoza.jpg", "value": 5},
-        "Tempura (Shrimp)": {"image": "Pic/Tempura_Shrimp.jpg", "value": 6},
+        "Tempura (Shrimp)": {"image": "Pic/Tempura-Shrimp.jpg", "value": 6},
         "Green Tea Ice Cream": {"image": "Pic/Green-Tea-Ice-Cream.jpg", "value": 7},
         "Mochi Ice Cream": {"image": "Pic/Mochi-Ice-Cream.jpg", "value": 8},
         "Matcha Latte": {"image": "Pic/matcha latte.jpg", "value": 9}
