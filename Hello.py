@@ -105,6 +105,8 @@ def main():
         st.write(rule_conclusion[0])
         for rule in rules:
             st.write(rule)
+            st.write(rule_conclusion[rule])
+            
             
 if __name__ == "__main__":
     main()
