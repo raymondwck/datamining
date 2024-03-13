@@ -102,7 +102,7 @@ def main():
     
     if st.button("Recommend"):
         rules = recommendFood(initial_order, X, features)
-        st.write(rules)
+        st.write(rules.rule_conclusion)
         for rule in rules:
             st.write(rule)
             
