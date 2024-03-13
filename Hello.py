@@ -44,7 +44,7 @@ def recommendFood(user_input, X, features):
         rule = f"Rule: If a person buys {premise_name}, they will also buy {conclusion_name}\n"
         rule += f"- Confidence: {confidence[(premise, conclusion)]:.3f}\n"
         rule += f"- Support: {support[(premise, conclusion)]}\n"
-        rule_conclusion.append(conclusion_name)
+
         return rule, rule_conclusion
 
     # Find the index of the user-input premise in the features list
@@ -61,7 +61,7 @@ def recommendFood(user_input, X, features):
         (premise, conclusion) = sorted_confidence[index][0]
         premise_name = features[premise]
         conclusion_name = features[conclusion]
-
+        rule_conclusion.append(conclusion_name)
         # Check if the premise and conclusion names are different and if the premise matches user input
         if premise_name != conclusion_name and premise == premise_index:
             rules.append((premise, conclusion))
