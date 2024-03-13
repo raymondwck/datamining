@@ -4,6 +4,7 @@ from collections import defaultdict
 import pandas as pd
 import requests
 from io import BytesIO
+
 def recommendFood(user_input, X, features):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
@@ -32,6 +33,9 @@ def recommendFood(user_input, X, features):
 
     sorted_support = sorted(support.items(), key=itemgetter(1), reverse=True)
     sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
+
+    # get the conclsuion id 
+    rule_conclusion = []
     
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
@@ -39,7 +43,8 @@ def recommendFood(user_input, X, features):
         rule = f"Rule: If a person buys {premise_name}, they will also buy {conclusion_name}\n"
         rule += f"- Confidence: {confidence[(premise, conclusion)]:.3f}\n"
         rule += f"- Support: {support[(premise, conclusion)]}\n"
-        return rule
+        rule_conclusion.append(conclusion_name)
+        return rule, rule_conclusion
 
     # Find the index of the user-input premise in the features list
     premise_index = features.index(user_input)
@@ -65,10 +70,8 @@ def recommendFood(user_input, X, features):
 
     # Prepare the rules for display
     rule_texts = []
-    rule_conclusion = []
     for i, rule in enumerate(sorted_rules[:3]):
         rule_texts.append(f"Rule #{i + 1}\n{printRule(rule[0], rule[1], support, confidence, features)}")
-        rule_conclusion.append(features)
         
     return rule_texts, rule_conclusion
 
