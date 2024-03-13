@@ -108,8 +108,8 @@ def main():
         for i, rule_text in enumerate(rule_texts):
             st.write(rule_text)
             conclusion_name = rule_conclusions[i]
-            if conclusion_name in food_info:
-                food_item = food_info[conclusion_name]
+            if conclusion_name in options:
+                food_item = options[conclusion_name]
                 st.image(food_item["image"], caption=conclusion_name, use_column_width=True)
 
             
