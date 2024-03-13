@@ -4,7 +4,6 @@ from collections import defaultdict
 import pandas as pd
 import requests
 from io import BytesIO
-import cv2
 def recommendFood(user_input, X, features):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
