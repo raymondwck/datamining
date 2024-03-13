@@ -4,7 +4,7 @@ from collections import defaultdict
 import pandas as pd
 import requests
 from io import BytesIO
-
+import cv2
 def recommendFood(user_input, X, features):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
@@ -95,8 +95,7 @@ def main():
     
         # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
-
-    import cv2 
+    
     if st.button("Recommend"):
         rules = recommendFood(initial_order, X, features)
         for rule in rules:
