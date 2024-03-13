@@ -78,13 +78,11 @@ url = 'https://github.com/raymondwck/datamining/raw/77e7ff11d72d28afeaa2f850cc03
 
 # Download the Excel file from the URL
 response = requests.get(url)
-if response.status_code == 200:
-    # Read the Excel file from the response content
+try:
     df = pd.read_excel(BytesIO(response.content))
-    # Display the DataFrame
-    print(df)
-else:
-    print("Failed to download the Excel file.")
+    # Further processing of the DataFrame
+except Exception as e:
+    print("An error occurred while reading the Excel file:", e)
 
 X = df.values
 n_features = 4  # Number of food items
