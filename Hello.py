@@ -1,7 +1,9 @@
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
-pip install openxyl
+import pandas as pd
+import requests
+from io import BytesIO
 
 def recommendFood(user_input, X, features):
     # Now compute for all possible rules
@@ -68,11 +70,6 @@ def recommendFood(user_input, X, features):
         rule_texts.append(f"Rule #{i + 1}\n{printRule(rule[0], rule[1], support, confidence, features)}")
         
     return rule_texts
-
-
-import pandas as pd
-import requests
-from io import BytesIO
 
 # URL of the Excel file
 url = 'https://github.com/raymondwck/datamining/raw/77e7ff11d72d28afeaa2f850cc03c5bfe6893fc8/JapanMenuItems.xlsx'
