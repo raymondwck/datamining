@@ -35,8 +35,6 @@ def recommendFood(user_input, X, features):
     sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
 
     # get the conclsuion id 
-    rule_conclusion = []
-    
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
         conclusion_name = features[conclusion]
@@ -96,15 +94,17 @@ def main():
         "Mochi Ice Cream": 8,
         "Matcha Latte": 9
     }
-    
-        # User input for initial food order using dropdown
+    # to get the conclusion name 
+    rule_conclusion = []
+
+    # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
     
     if st.button("Recommend"):
         rules = recommendFood(initial_order, X, features)
-        st.write(rules[1])
+        st.write(rule_conclusion[0])
         for rule in rules:
-            st.write(rule[0])
+            st.write(rule)
             
 if __name__ == "__main__":
     main()
