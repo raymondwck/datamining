@@ -1,6 +1,7 @@
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
+pip install openxyl
 
 def recommendFood(user_input, X, features):
     # Now compute for all possible rules
