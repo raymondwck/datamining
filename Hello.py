@@ -100,7 +100,7 @@ def main():
         st.write(rules[features])
         for rule in rules:
             st.write(rule)
-            rule_features = {feature: rule[feature] for feature in features}
+            rule_features = rule[features]
             st.write(rule_features)
             
 if __name__ == "__main__":
