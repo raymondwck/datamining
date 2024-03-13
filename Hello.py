@@ -87,7 +87,7 @@ def main():
     # Dictionary mapping food items to image paths and values
     options = {
         "California Roll": {"image": "Pic/california-roll.jpg", "value": 0},
-        "Salmon Nigiri": {"image": "Pic/1-Salmon_Nigiri.jpg", "value": 1},
+        "Salmon Nigiri": {"image": "Pic/1-Salmon-Nigiri.jpg", "value": 1},
         "Tonkotsu Ramen": {"image": "Pic/tonkastu ramen.jpg", "value": 2},
         "Chicken Teriyaki Bento": {"image": "Pic/chicken teriyaki bento.jpg", "value": 3},
         "Edamame": {"image": "Pic/edamame.jpg", "value": 4},
