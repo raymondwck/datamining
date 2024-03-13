@@ -40,10 +40,10 @@ def recommendFood(user_input, X, features):
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
         conclusion_name = features[conclusion]
+        rule_conclusion.append(conclusion_name)
         rule = f"Rule: If a person buys {premise_name}, they will also buy {conclusion_name}\n"
         rule += f"- Confidence: {confidence[(premise, conclusion)]:.3f}\n"
         rule += f"- Support: {support[(premise, conclusion)]}\n"
-        rule_conclusion.append(conclusion_name)
         return rule, rule_conclusion
 
     # Find the index of the user-input premise in the features list
