@@ -5,7 +5,7 @@ import pandas as pd
 import requests
 from io import BytesIO
 
-def recommendFood(user_input, X, features):
+def recommendFood(user_input, X, features,rule_conclusion):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
     invalid_rules = defaultdict(int)
@@ -101,7 +101,7 @@ def main():
     initial_order = st.selectbox("Select your initial food order:", options)
     
     if st.button("Recommend"):
-        rules = recommendFood(initial_order, X, features)
+        rules = recommendFood(initial_order, X, features,rule_conclusion)
         st.write(rule_conclusion[0])
         for rule in rules:
             st.write(rule)
