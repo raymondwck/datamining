@@ -103,9 +103,15 @@ def main():
     
     if st.button("Recommend"):
         rules = recommendFood(initial_order, X, features)
-        st.write(rules[1])  # Accessing rule_conclusion
-        for rule in rules[0]:  # Accessing rule_texts
-            st.write(rule)
+        rule_texts = rules[0]
+        rule_conclusions = rules[1]
+        for i, rule_text in enumerate(rule_texts):
+            st.write(rule_text)
+            conclusion_name = rule_conclusions[i]
+            if conclusion_name in food_info:
+                food_item = food_info[conclusion_name]
+                st.image(food_item["image"], caption=conclusion_name, use_column_width=True)
+
             
 if __name__ == "__main__":
     main()
