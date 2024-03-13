@@ -104,7 +104,7 @@ def main():
         rules = recommendFood(initial_order, X, features)
         st.write(rules[1])
         for rule in rules:
-            st.write(rule)
+            st.write(rule[0])
             
 if __name__ == "__main__":
     main()
