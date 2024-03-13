@@ -1,3 +1,4 @@
+
 import streamlit as st
 from operator import itemgetter
 from collections import defaultdict
@@ -5,7 +6,7 @@ import pandas as pd
 import requests
 from io import BytesIO
 
-def recommendFood(user_input, X, features,rule_conclusion):
+def recommendFood(user_input, X, features):
     # Now compute for all possible rules
     valid_rules = defaultdict(int)
     invalid_rules = defaultdict(int)
@@ -35,13 +36,15 @@ def recommendFood(user_input, X, features,rule_conclusion):
     sorted_confidence = sorted(confidence.items(), key=itemgetter(1), reverse=True)
 
     # get the conclsuion id 
+    rule_conclusion = []
+    
     def printRule(premise, conclusion, support, confidence, features):
         premise_name = features[premise]
         conclusion_name = features[conclusion]
-        rule_conclusion.append(conclusion_name)
         rule = f"Rule: If a person buys {premise_name}, they will also buy {conclusion_name}\n"
         rule += f"- Confidence: {confidence[(premise, conclusion)]:.3f}\n"
         rule += f"- Support: {support[(premise, conclusion)]}\n"
+        rule_conclusion.append(conclusion_name)
         return rule, rule_conclusion
 
     # Find the index of the user-input premise in the features list
@@ -94,19 +97,15 @@ def main():
         "Mochi Ice Cream": 8,
         "Matcha Latte": 9
     }
-    # to get the conclusion name 
-    rule_conclusion = []
-
-    # User input for initial food order using dropdown
+    
+        # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
     
     if st.button("Recommend"):
-        rules = recommendFood(initial_order, X, features,rule_conclusion)
-        st.write(rule_conclusion[0])
-        for rule in rules:
+        rules = recommendFood(initial_order, X, features)
+        st.write(rules[1])  # Accessing rule_conclusion
+        for rule in rules[0]:  # Accessing rule_texts
             st.write(rule)
-            st.write(rule_conclusion[rule])
-            
             
 if __name__ == "__main__":
     main()
