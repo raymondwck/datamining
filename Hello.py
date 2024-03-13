@@ -72,18 +72,18 @@ def recommendFood(user_input, X, features):
     return rule_texts
 
 # URL of the Excel file
-url = 'https://github.com/raymondwck/datamining/raw/77e7ff11d72d28afeaa2f850cc03c5bfe6893fc8/JapanMenuItems.xlsx'
+# url = 'https://github.com/raymondwck/datamining/raw/77e7ff11d72d28afeaa2f850cc03c5bfe6893fc8/JapanMenuItems.xlsx'
 
-# Download the Excel file from the URL
-response = requests.get(url)
-if response.status_code == 200:
-    # Read the Excel file from the response conte
-    df = pd.read_excel(BytesIO(response.content))
-    # Display the DataFrame
-    print(df)
-else:
-    print("Failed to download the Excel file.")
-
+# # Download the Excel file from the URL
+# response = requests.get(url)
+# if response.status_code == 200:
+#     # Read the Excel file from the response conte
+#     df = pd.read_excel(BytesIO(response.content))
+#     # Display the DataFrame
+#     print(df)
+# else:
+#     print("Failed to download the Excel file.")
+df = pd.read_excel('JapaneseMenuItems.xlsx')
 X = df.values
 n_features = 4  # Number of food items
 features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
