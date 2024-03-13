@@ -84,18 +84,18 @@ features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriy
 
 def main():
     st.title("Food Recommendation System")
-    # Define your options for the dropdown
+    # Dictionary mapping food items to image paths and values
     options = {
-        "California Roll": 0,
-        "Salmon Nigiri": 1,
-        "Tonkotsu Ramen": 2,
-        "Chicken Teriyaki Bento": 3,
-        "Edamame": 4,
-        "Gyoza (Dumplings)": 5,
-        "Tempura (Shrimp)": 6,
-        "Green Tea Ice Cream": 7,
-        "Mochi Ice Cream": 8,
-        "Matcha Latte": 9
+        "California Roll": {"image": "img/california_roll.jpg", "value": 0},
+        "Salmon Nigiri": {"image": "img/salmon_nigiri.jpg", "value": 1},
+        "Tonkotsu Ramen": {"image": "img/tonkotsu_ramen.jpg", "value": 2},
+        "Chicken Teriyaki Bento": {"image": "img/chicken_teriyaki_bento.jpg", "value": 3},
+        "Edamame": {"image": "img/edamame.jpg", "value": 4},
+        "Gyoza (Dumplings)": {"image": "img/gyoza_dumplings.jpg", "value": 5},
+        "Tempura (Shrimp)": {"image": "img/tempura_shrimp.jpg", "value": 6},
+        "Green Tea Ice Cream": {"image": "img/green_tea_ice_cream.jpg", "value": 7},
+        "Mochi Ice Cream": {"image": "img/mochi_ice_cream.jpg", "value": 8},
+        "Matcha Latte": {"image": "img/matcha_latte.jpg", "value": 9}
     }
     
         # User input for initial food order using dropdown
