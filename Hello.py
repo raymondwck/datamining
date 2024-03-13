@@ -55,7 +55,7 @@ def recommendFood(user_input, X, features):
 
     # Iterate over the sorted confidence list
     for index in range(len(sorted_confidence)):
-        if len(rules) >= 3:
+        if len(rules) >= 5:
             break
 
         (premise, conclusion) = sorted_confidence[index][0]
