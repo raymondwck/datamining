@@ -97,9 +97,9 @@ def main():
     
     if st.button("Recommend"):
         rules = recommendFood(initial_order, X, features)
+        st.wrtie(rules)
         for rule in rules:
             st.write(rule)
-            if features == "Matcha Latte":
-                img = cv2.imread("Pic/match latte.jpg", cv2.IMREAD_ANYCOLOR)
+            
 if __name__ == "__main__":
     main()
