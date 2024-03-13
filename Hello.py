@@ -4,7 +4,6 @@ from collections import defaultdict
 import pandas as pd
 import requests
 from io import BytesIO
-install openpyxl
 
 def recommendFood(user_input, X, features):
     # Now compute for all possible rules
