@@ -86,16 +86,16 @@ def main():
     st.title("Food Recommendation System")
     # Dictionary mapping food items to image paths and values
     options = {
-        "California Roll": {"image": "img/california_roll.jpg", "value": 0},
-        "Salmon Nigiri": {"image": "img/salmon_nigiri.jpg", "value": 1},
-        "Tonkotsu Ramen": {"image": "img/tonkotsu_ramen.jpg", "value": 2},
-        "Chicken Teriyaki Bento": {"image": "img/chicken_teriyaki_bento.jpg", "value": 3},
-        "Edamame": {"image": "img/edamame.jpg", "value": 4},
-        "Gyoza (Dumplings)": {"image": "img/gyoza_dumplings.jpg", "value": 5},
-        "Tempura (Shrimp)": {"image": "img/tempura_shrimp.jpg", "value": 6},
-        "Green Tea Ice Cream": {"image": "img/green_tea_ice_cream.jpg", "value": 7},
-        "Mochi Ice Cream": {"image": "img/mochi_ice_cream.jpg", "value": 8},
-        "Matcha Latte": {"image": "img/matcha_latte.jpg", "value": 9}
+        "California Roll": {"image": "Pic/california-roll.jpg", "value": 0},
+        "Salmon Nigiri": {"image": "Pic/1-Salmon_Nigiri.jpg", "value": 1},
+        "Tonkotsu Ramen": {"image": "Pic/tonkastu ramen.jpg", "value": 2},
+        "Chicken Teriyaki Bento": {"image": "Pic/chicken teriyaki bento.jpg", "value": 3},
+        "Edamame": {"image": "Pic/edamame.jpg", "value": 4},
+        "Gyoza (Dumplings)": {"image": "Pic/Gyoza.jpg", "value": 5},
+        "Tempura (Shrimp)": {"image": "Pic/Tempura_Shrimp.jpg", "value": 6},
+        "Green Tea Ice Cream": {"image": "Pic/Green-Tea-Ice-Cream.jpg", "value": 7},
+        "Mochi Ice Cream": {"image": "Pic/Mochi-Ice-Cream.jpg", "value": 8},
+        "Matcha Latte": {"image": "Pic/matcha latte.jpg", "value": 9}
     }
     
         # User input for initial food order using dropdown
