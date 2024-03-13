@@ -65,10 +65,12 @@ def recommendFood(user_input, X, features):
 
     # Prepare the rules for display
     rule_texts = []
+    rule_conclusion = []
     for i, rule in enumerate(sorted_rules[:3]):
         rule_texts.append(f"Rule #{i + 1}\n{printRule(rule[0], rule[1], support, confidence, features)}")
+        rule_conclusion.append(features)
         
-    return rule_texts
+    return rule_texts, rule_conclusion
 
 df = pd.read_excel("JapanMenuItems.xlsx")
 X = df.values
