@@ -71,18 +71,6 @@ def recommendFood(user_input, X, features):
         
     return rule_texts
 
-# URL of the Excel file
-# url = 'https://github.com/raymondwck/datamining/raw/77e7ff11d72d28afeaa2f850cc03c5bfe6893fc8/JapanMenuItems.xlsx'
-
-# # Download the Excel file from the URL
-# response = requests.get(url)
-# if response.status_code == 200:
-#     # Read the Excel file from the response conte
-#     df = pd.read_excel(BytesIO(response.content))
-#     # Display the DataFrame
-#     print(df)
-# else:
-#     print("Failed to download the Excel file.")
 df = pd.read_excel("JapanMenuItems.xlsx")
 X = df.values
 n_features = 4  # Number of food items
@@ -107,11 +95,13 @@ def main():
     
         # User input for initial food order using dropdown
     initial_order = st.selectbox("Select your initial food order:", options)
-    
+
+    import cv2 
     if st.button("Recommend"):
         rules = recommendFood(initial_order, X, features)
         for rule in rules:
             st.write(rule)
-            
+            if features == "Matcha Latte":
+                img = cv2.imread("Pic/match latte.jpg", cv2.IMREAD_ANYCOLOR)
 if __name__ == "__main__":
     main()
