@@ -83,7 +83,7 @@ def recommendFood(user_input, X, features):
 #     print(df)
 # else:
 #     print("Failed to download the Excel file.")
-df = pd.read_excel(r"JapanMenuItems.xlsx")
+df = pd.read_excel("JapanMenuItems.xlsx")
 X = df.values
 n_features = 4  # Number of food items
 features = ["California Roll", "Salmon Nigiri", "Tonkotsu Ramen", "Chicken Teriyaki Bento", "Edamame", "Gyoza (Dumplings)", "Tempura (Shrimp)", 
